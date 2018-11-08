@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>vueproject</title>
+    <style>
+        .pagination {
+
+        }
+
+        .active {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    姓名：<input type="text" v-model="newPerson.name"><br>
+    年龄：<input type="text" v-model="newPerson.age"><br>
+    性别：<select v-model="newPerson.sex">
+            <option value="man">man</option>
+            <option value="woman">woman</option>
+        </select><br>
+        <button @click="createPerson">添加</button>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Delete</th>
+        </tr>
+        <tr v-for="(p, index) in people" :key="p.name">
+            <td>{{p.name}} : {{index}}</td>
+            <td>{{p.age}}</td>
+            <td>{{p.sex}}</td>
+            <td><button @click="deletePerson(index)">删除</button></td>
+        </tr>
+    </table>
+</div>
+
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            newPerson: {
+                name: 'aa',
+                age: 10,
+                sex: 'man'
+            },
+            people: []
+        },
+        methods: {
+            createPerson: function () {
+                this.people.push(this.newPerson);
+                this.newPerson = {name: 'aa', age: 10, sex: 'man'}
+            },
+            deletePerson: function (index) {
+                this.people.splice(index,1);
+            }
+        }
+    })
+</script>
+</body>
+</html>
