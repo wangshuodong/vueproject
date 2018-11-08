@@ -2,7 +2,7 @@
     <div class="wrapper">
         <Header></Header>
         <Sidebar></Sidebar>
-        111111
+        <router-view/>
     </div>
 </template>
 
@@ -19,6 +19,9 @@
         components: {
             Header,
             Sidebar
+        },
+        created: {
+
         }
     }
 </script>

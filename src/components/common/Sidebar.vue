@@ -42,7 +42,7 @@
                 items: [
                     {
                         icon: 'el-icon-setting',
-                        index: 'dashboard',
+                        index: 'menu1',
                         title: '系统首页'
                     },
 
@@ -112,6 +112,7 @@
             bus.$on('collapse', msg => {
                 this.collapse = msg;
             })
+
         }
     }
 </script>
