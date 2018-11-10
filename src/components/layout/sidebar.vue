@@ -48,7 +48,7 @@
 
                     {
                         icon: 'el-icon-tickets',
-                        index: 'table',
+                        index: 'menu2',
                         title: '基础表格'
                     },
                     {

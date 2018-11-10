@@ -2,13 +2,17 @@
     <div class="wrapper">
         <Header></Header>
         <Sidebar></Sidebar>
-        <router-view/>
+        <transition name="fade" mode="out-in">
+            <router-view/>
+        </transition>
+
     </div>
 </template>
 
 <script>
-    import Header from './Header.vue';
-    import Sidebar from './Sidebar.vue';
+    import Header from './header.vue';
+    import Sidebar from './sidebar.vue';
+
     export default {
         data() {
             return {
@@ -20,11 +24,16 @@
             Header,
             Sidebar
         },
-        created: {
-
-        }
+        created: {}
     }
 </script>
 
-<style>
+<style scoped>
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
+    }
 </style>
