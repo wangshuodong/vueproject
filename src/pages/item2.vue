@@ -10,9 +10,5 @@
 </script>
 
 <style scoped>
-    .item{
-        position: fixed;
-        top: 61px;
-        left: 200px;
-    }
+
 </style>

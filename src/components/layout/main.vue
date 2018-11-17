@@ -2,14 +2,18 @@
     <div class="wrapper">
         <Header></Header>
         <Sidebar></Sidebar>
-        <transition name="fade" mode="out-in">
-            <router-view/>
-        </transition>
-
+        <div class="content-box" :class="{'content-collapse':isSidebarNavCollapse}">
+            <div class="content">
+                <transition name="fade" mode="out-in">
+                    <router-view/>
+                </transition>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     import Header from './header.vue';
     import Sidebar from './sidebar.vue';
 
@@ -18,6 +22,12 @@
             return {
                 tagsList: []
             }
+        },
+        computed: {
+            ...mapState(['isSidebarNavCollapse']),
+            defActive() {
+                return this.$route.path
+            },
         },
         components: {
             Header,

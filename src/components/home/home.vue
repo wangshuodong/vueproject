@@ -1,6 +1,8 @@
 <template>
-    <div class="item">
-        <h1 style="margin-top: 30px;margin-left: 400px; color: cornflowerblue">首页</h1>
+    <div>
+        <el-card class="box-card">
+            首页
+        </el-card>
     </div>
 </template>
 
@@ -10,9 +12,7 @@
 </script>
 
 <style scoped>
-    .item{
-        position: fixed;
-        top: 61px;
-        left: 200px;
+    .box-card {
+        height: 480px;
     }
 </style>

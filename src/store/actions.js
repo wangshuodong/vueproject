@@ -40,6 +40,8 @@ export default {
                         }
                     }
                     flatNavList(state.navList)
+
+
                     commit("setPermissionList", permissionList)
                     resolve(permissionList)
                 })

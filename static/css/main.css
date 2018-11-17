@@ -29,7 +29,7 @@ a {
     overflow-y: scroll;
     -webkit-transition: left .3s ease-in-out;
     transition: left .3s ease-in-out;
-    background: #E5E9F2;
+    background: #F5F7F9;
 }
 
 .content {
