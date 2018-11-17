@@ -1,14 +1,21 @@
 export default {
-    LOGIN_IN(state, token) {
-        state.UserToken = token
+    setName: (state, data) => {
+        state.name = data
     },
-    LOGIN_OUT(state) {
-        state.UserToken = ''
+
+    setNavList: (state, data) => {
+        state.navList = data
     },
+
+    setPermissionList: (state, data) => {
+        state.permissionList = data
+    },
+
+    setToken: (state, data) => {
+        state.token = data
+    },
+
     toggleNavCollapse(state) {
         state.isSidebarNavCollapse = !state.isSidebarNavCollapse
     },
-    setCrumbList(state, list) {
-        state.crumbList = list
-    }
 }

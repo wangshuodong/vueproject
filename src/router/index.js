@@ -8,61 +8,65 @@ export default new Router({
     mode: 'history',
     routes: [
         {
+            path: '/',
+            redirect: '/login'
+        },
+        {
             path: '/login',
-            name: 'login',
             component: ()=> import('../components/login/login')
         },
         {
-            path: '/',
-            name: 'home',
-            //redirect: '/home',
+            path: '/error',
             component: Main,
             children: [
                 {
-                    path: 'menu1',
-                    name: 'menu1',
-                    component: ()=> import('../pages/item1')
+                    path: '403',
+                    component: () => import('../components/error/403')
                 },
                 {
-                    path: 'menu2',
-                    name: 'menu2',
-                    component: ()=> import('../pages/item2')
-                },
+                    path: '404',
+                    component: () => import('../components/error/404')
+                }
             ]
+        },
+        {
+            path: '/home',
+            component: Main,
+            meta: {
+                requiresAuth: true
+            },
+            children: [
+                {
+                    path: '',
+                    component: ()=> import('../components/home/home')
+                }
+            ]
+        },
+        {
+            path: '/example',
+            component: Main,
+            meta: {
+                requiresAuth: true
+            },
+            children: [
+                {
+                    path: 'item1',
+                    component: () => import('../pages/item1')
+                },
+                {
+                    path: 'item2',
+                    component: () => import('../pages/item2')
+                },
+                {
+                    path: 'item3',
+                    component: () => import('../pages/item2')
+                }
+            ]
+        },
+        {
+            path: '*',
+            redirect: '/error/404'
         }
     ]
 })
 
-
-/* 准备动态添加的路由 */
-export const DynamicRoutes = [
-    {
-        path: '',
-        component: Main,
-        name: 'container',
-        redirect: 'home',
-        meta: {
-            requiresAuth: true,
-            name: '首页'
-        },
-        children: [
-            {
-                path: 'home',
-                component: Main,
-                name: 'home',
-                meta: {
-                    name: '首页',
-                    icon: 'icon-home'
-                }
-            }
-        ]
-    },
-    {
-        path: '/403',
-        component: Main
-    },
-    {
-        path: '*',
-        component: Main
-    }
-]

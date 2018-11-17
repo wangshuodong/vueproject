@@ -1,0 +1,28 @@
+{
+    "code": 0,
+    "message": "获取菜单成功",
+    "data": [
+        {
+            "path": "/home",
+            "name": "首页",
+            "icon": "el-icon-setting"
+        },
+        {
+            "name": "完整示例",
+            "icon": "el-icon-message",
+            "child": [
+                {
+                    "path": "/example/item1",
+                    "name": "列表页面",
+                    "permission": [
+                        "edit"
+                    ]
+                },
+                {
+                    "path": "/example/item2",
+                    "name": "图表页面"
+                }
+            ]
+        }
+    ]
+}

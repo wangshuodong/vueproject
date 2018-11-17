@@ -16,15 +16,13 @@
     export default {
         data() {
             return {
-                tagsList: [],
-                collapse: false
+                tagsList: []
             }
         },
         components: {
             Header,
             Sidebar
         },
-        created: {}
     }
 </script>
 

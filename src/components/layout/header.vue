@@ -23,11 +23,11 @@
                     <span class="btn-bell-badge" v-if="message"></span>
                 </div>
                 <!-- 用户头像 -->
-                <div class="user-avator"><img src="static/img/img.jpg"></div>
+                <div class="user-avator"><img src="/static/img/img.jpg"></div>
                 <!-- 用户名下拉菜单 -->
                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
-                        {{username}} <i class="el-icon-caret-bottom"></i>
+                        {{name}} <i class="el-icon-caret-bottom"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
                         <a href="http://blog.gdfengshuo.com/about/" target="_blank">
@@ -46,34 +46,31 @@
 
 <script>
     import bus from './bus.js'
+    import { mapState, mapActions } from 'vuex'
 
     export default {
         data() {
             return {
-                collapse: false,
                 fullscreen: false,
-                name: '管理员',
                 message: 2
             }
         },
         computed: {
-            username() {
-                let username = localStorage.getItem('ms_username');
-                return username ? username : this.name;
-            }
+            ...mapState(['name', 'isSidebarNavCollapse'])
         },
         methods: {
+            ...mapActions(['logout']),
             // 用户名下拉菜单选择事件
             handleCommand(command) {
                 if (command == 'loginout') {
-                    localStorage.removeItem('ms_username')
-                    this.$router.push('/login');
+                    this.logout().then(res => {
+                        this.$router.push('/login');
+                    })
                 }
             },
             // 侧边栏折叠
             collapseChage() {
-                this.collapse = !this.collapse;
-                bus.$emit('collapse', this.collapse);
+                this.$store.commit("toggleNavCollapse")
             },
             // 全屏事件
             handleFullScreen() {

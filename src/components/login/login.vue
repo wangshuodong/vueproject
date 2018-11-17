@@ -1,116 +1,116 @@
 <template>
-    <div class="clearfix" id="login_wrap">
-        <h2 class="title">随便搞个登录页</h2>
-        <div id="login">
-            <div class="login--account">
-                <span>账号：</span>
-                <input type="text"  placeholder="随便输" name="account" v-model.trim="account"/>
-            </div>
-            <div class="login--password">
-                <span>密码：</span>
-                <input type="password"  placeholder="随便输" name="password" v-model.trim="password" @keyup.enter="login"/>
-            </div>
-            <p class="login--btn">
-                <button id="loginBtn" @click="login">登录</button>
-            </p>
+    <div class="login-wrap">
+        <div class="ms-login">
+            <div class="ms-title">后台管理系统</div>
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="ms-content">
+                <el-form-item prop="username">
+                    <el-input v-model="ruleForm.username" placeholder="username">
+                        <el-button slot="prepend" icon="ivu-icon ivu-icon-ios-contact"></el-button>
+                    </el-input>
+                </el-form-item>
+                <el-form-item prop="password">
+                    <el-input type="password" placeholder="password" v-model="ruleForm.password"
+                              @keyup.enter.native="submitForm('ruleForm')">
+                        <el-button slot="prepend" icon="ivu-icon ivu-icon-ios-lock"></el-button>
+                    </el-input>
+                </el-form-item>
+                <div class="login-btn">
+                    <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+                </div>
+                <p class="login-tips">Tips : 用户名和密码随便填。</p>
+            </el-form>
         </div>
     </div>
 </template>
 
 <script>
-import { login } from '@/api/permission'
-export default {
-    data() {
-        return {
-            account: '',
-            password: ''
-        }
-    },
-    methods: {
-        async login() {
-            try {
-                let data = await login()
-                let token = data.token
-                this.$store.commit('LOGIN_IN', token)
-                this.$router.replace('/')
-            } catch (e) {
-                console.log(e)
+    import { mapState, mapActions } from 'vuex'
+
+    export default {
+        data: function () {
+            return {
+                ruleForm: {
+                    username: 'admin',
+                    password: '123123'
+                },
+                rules: {
+                    username: [
+                        {required: true, message: '请输入用户名', trigger: 'blur'}
+                    ],
+                    password: [
+                        {required: true, message: '请输入密码', trigger: 'blur'}
+                    ]
+                }
+            }
+        },
+        methods: {
+            ...mapActions({
+                login: 'login'
+            }),
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        this.login({
+                            username: this.ruleForm.username,
+                            password: this.ruleForm.password
+                        }).then(res => {
+                            this.$router.replace('/home')
+                        })
+                    } else {
+                        return false;
+                    }
+                });
             }
         }
     }
-}
 </script>
 
-<style scoped lang="scss">
-.title {
-    text-align: center;
-    font-size: 22px;
-    padding-top: 100px;
-}
-#login_wrap {
-    position: relative;
-    background: rgba(64, 64, 194, 0.1);
-    > div {
-        background: #fff;
-        width: 479px;
-        height: 325px;
-        padding: 30px 40px;
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        > div {
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-            &.login--account {
-                margin: 25px 0 30px;
-            }
-            span {
-                color: #666;
-                display: inline-block;
-                width: 84px;
-                font-size: 20px;
-            }
-            input {
-                background: none;
-                font-size: 16px;
-                border: none;
-                height: 30px;
-                width: 280px;
-                padding-left: 12px;
-                box-sizing: border-box;
-                color: #666;
-                &.error {
-                    border: 1px solid #f00;
-                }
-                &::-webkit-input-placeholder {
-                    color: #aaa;
-                }
-            }
-        }
-
-        p {
-            text-align: right;
-            &.login--btn {
-                button {
-                    width: 100%;
-                    height: 50px;
-                    font-size: 18px;
-                    background: #0f6171;
-                    border: none;
-                    margin-top: 30px;
-                    color: #fff;
-                    border-radius: 6px;
-                    cursor: pointer;
-                }
-            }
-            a {
-                color: #fff;
-                display: inline-block;
-                padding: 0 15px;
-                font-size: 14px;
-            }
-        }
+<style scoped>
+    .login-wrap {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-image: url(../../assets/login-bg.jpg);
+        background-size: 100%;
     }
-}
+
+    .ms-title {
+        width: 100%;
+        line-height: 50px;
+        text-align: center;
+        font-size: 20px;
+        color: #fff;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .ms-login {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 350px;
+        margin: -190px 0 0 -175px;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.3);
+        overflow: hidden;
+    }
+
+    .ms-content {
+        padding: 30px 30px;
+    }
+
+    .login-btn {
+        text-align: center;
+    }
+
+    .login-btn button {
+        width: 100%;
+        height: 36px;
+        margin-bottom: 10px;
+    }
+
+    .login-tips {
+        font-size: 12px;
+        line-height: 30px;
+        color: #fff;
+    }
 </style>
