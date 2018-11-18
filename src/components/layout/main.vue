@@ -3,6 +3,9 @@
         <Header></Header>
         <Sidebar></Sidebar>
         <div class="content-box" :class="{'content-collapse':isSidebarNavCollapse}">
+            <div class="sys-search">
+                搜索栏
+            </div>
             <div class="content">
                 <transition name="fade" mode="out-in">
                     <router-view/>
