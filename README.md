@@ -18,3 +18,7 @@ vue-backend
 https://github.com/harsima/vue-backend
 vue-manage-system
 https://github.com/lin-xin/vue-manage-system
+vue-antd-admin
+https://gitee.com/iczer/vue-antd-admin
+ant-design-vue
+https://tangjinzhou.gitee.io/ant-design-vue/docs/vue/introduce-cn/
