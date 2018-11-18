@@ -186,9 +186,12 @@ a {
 }
 
 .sys-title {
-    height: 60px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #5cc1c0;
+    display: block;
+    height: auto;
+    /*margin-bottom: 10px;*/
+    padding: 20px 20px 0px 20px;
+    /*border-bottom: 1px solid #5cc1c0;*/
+    background-color: #f9f9f9;
 }
 .sys-title strong {
     line-height: 60px;

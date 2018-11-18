@@ -1,14 +1,16 @@
 <template>
     <div>
-        <el-card class="box-card">
-            首页
-        </el-card>
+        <app-title title="表格综合"></app-title>
+        <div class="content">
+            <el-card class="box-card">
+                首页
+            </el-card>
+        </div>
     </div>
 </template>
 
 <script>
-    export default {
-    }
+    export default {}
 </script>
 
 <style scoped>
